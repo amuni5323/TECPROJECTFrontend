@@ -15,7 +15,7 @@ export default function AuthForm({ isLogin }) {
     const endpoint = isLogin ? "/auth/login" : "/auth/register";
 
     try {
-      const res = await fetch(`hhttps://tecprojectbackend.onrender.com/api${endpoint}`, {
+      const res = await fetch(`https://tecprojectbackend.onrender.com/api${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(
