@@ -1,69 +1,6 @@
-// "use client";
-// import { useState } from "react";
-// import { useRouter } from "next/navigation";
-
-// export default function AuthForm({ isLogin }) {
-//   const router = useRouter();
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     // Your login or register logic here
-
-//     // After successful login, redirect to home
-//     router.push("/");
-//   };
-
-//   return (
-//     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
-//       <form 
-//         onSubmit={handleSubmit}
-//         className="bg-white rounded-xl shadow-md p-8 max-w-md w-full"
-//       >
-//         <h2 className="text-3xl font-semibold mb-6 text-center text-gray-800">
-//           {isLogin ? "Login to Your Account" : "Create a New Account"}
-//         </h2>
-
-//         <label className="block mb-2 text-gray-700 font-medium" htmlFor="email">
-//           Email Address
-//         </label>
-//         <input
-//           id="email"
-//           type="email"
-//           required
-//           value={email}
-//           onChange={(e) => setEmail(e.target.value)}
-//           className="w-full p-3 mb-5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
-//           placeholder="you@example.com"
-//         />
-
-//         <label className="block mb-2 text-gray-700 font-medium" htmlFor="password">
-//           Password
-//         </label>
-//         <input
-//           id="password"
-//           type="password"
-//           required
-//           value={password}
-//           onChange={(e) => setPassword(e.target.value)}
-//           className="w-full p-3 mb-6 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
-//           placeholder="Enter your password"
-//         />
-
-//         <button
-//           type="submit"
-//           className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg transition-colors"
-//         >
-//           {isLogin ? "Login" : "Register"}
-//         </button>
-//       </form>
-//     </div>
-//   );
-// }
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function AuthForm({ isLogin }) {
@@ -97,12 +34,14 @@ export default function AuthForm({ isLogin }) {
 
       if (isLogin) {
         alert("Login successful");
-        router.push("/");
+        localStorage.setItem("token", data.token); // Save token
+        router.push("/generate");
       } else {
         alert("Registration successful. Check your email to verify.");
-        router.push("/email-sent");
+        router.push("/login"); // Navigate to login after registration
       }
     } catch (error) {
+      console.error("❌ Error:", error);
       alert("Something went wrong. Please try again.");
     }
   };
@@ -168,6 +107,115 @@ export default function AuthForm({ isLogin }) {
     </div>
   );
 }
+
+
+// "use client";
+
+// import { useState } from "react";
+// import { useRouter } from "next/navigation";
+// import GeneratePage from "@/app/generate/page";
+// export default function AuthForm({ isLogin }) {
+//   const router = useRouter();
+//   const [name, setName] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     const endpoint = isLogin ? "/auth/login" : "/auth/register";
+
+//     try {
+//       const res = await fetch(`http://localhost:5001/api${endpoint}`, {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(
+//           isLogin
+//             ? { email, password }
+//             : { name, email, password, role: "user" }
+//         ),
+//       });
+
+//       const data = await res.json();
+
+//       if (!res.ok) {
+//         alert(data.message);
+//         return;
+//       }
+
+//       if (isLogin) {
+//         alert("Login successful");
+//         router.push("/");
+//       } else {
+//         alert("Registration successful. Check your email to verify.");
+//         router.push("/email-sent");
+//       }
+//     } catch (error) {
+//       alert("Something went wrong. Please try again.");
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <h2 className="text-2xl font-bold mb-6 text-center">
+//         {isLogin ? "Login" : "Register"}
+//       </h2>
+//       <form onSubmit={handleSubmit}>
+//         {!isLogin && (
+//           <div>
+//             <label className="block mb-2">Name</label>
+//             <input
+//               type="text"
+//               required
+//               value={name}
+//               onChange={(e) => setName(e.target.value)}
+//               className="w-full p-2 mb-4 border rounded"
+//               placeholder="Your Name"
+//             />
+//           </div>
+//         )}
+//         <div>
+//           <label className="block mb-2">Email</label>
+//           <input
+//             type="email"
+//             required
+//             value={email}
+//             onChange={(e) => setEmail(e.target.value)}
+//             className="w-full p-2 mb-4 border rounded"
+//             placeholder="you@example.com"
+//           />
+//         </div>
+//         <div>
+//           <label className="block mb-2">Password</label>
+//           <input
+//             type="password"
+//             required
+//             value={password}
+//             onChange={(e) => setPassword(e.target.value)}
+//             className="w-full p-2 mb-6 border rounded"
+//             placeholder="********"
+//           />
+//         </div>
+//         <button
+//           type="submit"
+//           className="w-full bg-indigo-600 text-white p-2 rounded hover:bg-indigo-700"
+//         >
+//           {isLogin ? "Login" : "Register"}
+//         </button>
+//       </form>
+
+//       <p className="mt-4 text-center">
+//         {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
+//         <button
+//           className="text-indigo-600 hover:underline"
+//           onClick={() => router.push(isLogin ? "/register" : "/login")}
+//         >
+//           {isLogin ? "Register" : "Login"}
+//         </button>
+//       </p>
+//     </div>
+//   );
+// }
 
 
 

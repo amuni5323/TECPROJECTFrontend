@@ -71,7 +71,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-
+import GeneratePage from "./generate/page";
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
