@@ -57,32 +57,69 @@
 //     </div>
 //   );
 // }
-"use client";
 
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+// last one 
+// "use client";
 
-export default function VerifyEmail() {
-  const searchParams = useSearchParams();
-  const token = searchParams.get('token');
-  const [message, setMessage] = useState('Verifying...');
+// import { useEffect, useState } from 'react';
+// import { useSearchParams } from 'next/navigation';
 
-  useEffect(() => {
-    if (token) {
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/verify-email/${token}`)
-        .then(async (res) => {
-          const data = await res.json();
-          if (res.ok) {
-            setMessage(data.message);
-          } else {
-            setMessage(data.message || 'Error verifying email');
-          }
-        })
-        .catch(() => setMessage('Network error'));
-    } else {
-      setMessage('No token provided');
+// export default function VerifyEmail() {
+//   const searchParams = useSearchParams();
+//   const token = searchParams.get('token');
+//   const [message, setMessage] = useState('Verifying...');
+
+//   useEffect(() => {
+//     if (token) {
+//       fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/verify-email/${token}`)
+//         .then(async (res) => {
+//           const data = await res.json();
+//           if (res.ok) {
+//             setMessage(data.message);
+//           } else {
+//             setMessage(data.message || 'Error verifying email');
+//           }
+//         })
+//         .catch(() => setMessage('Network error'));
+//     } else {
+//       setMessage('No token provided');
+//     }
+//   }, [token]);
+
+//   return (
+//     <div className="text-center mt-20">
+//       <h2 className="text-2xl font-bold">Email Verification</h2>
+//       <p className="mt-4 text-lg">{message}</p>
+//     </div>
+//   );
+// }
+
+import React from 'react';
+
+export default async function VerifyEmail({ searchParams }) {
+  const token = searchParams.token;
+  let message = '';
+
+  if (token) {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/verify-email/${token}`,
+        { cache: 'no-store' } // optional: to avoid caching
+      );
+
+      const data = await res.json();
+
+      if (res.ok) {
+        message = data.message;
+      } else {
+        message = data.message || 'Error verifying email';
+      }
+    } catch (error) {
+      message = 'Network error';
     }
-  }, [token]);
+  } else {
+    message = 'No token provided';
+  }
 
   return (
     <div className="text-center mt-20">
