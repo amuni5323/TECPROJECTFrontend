@@ -15,7 +15,7 @@ export default function AuthForm({ isLogin }) {
     const endpoint = isLogin ? "/auth/login" : "/auth/register";
 
     try {
-      const res = await fetch(`http://localhost:5001/api${endpoint}`, {
+      const res = await fetch(`hhttps://tecprojectbackend.onrender.com/api${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(
@@ -35,7 +35,7 @@ export default function AuthForm({ isLogin }) {
       if (isLogin) {
         alert("Login successful");
         localStorage.setItem("token", data.token); // Save token
-        router.push("/generate");
+        router.push("/");
       } else {
         alert("Registration successful. Check your email to verify.");
         router.push("/login"); // Navigate to login after registration

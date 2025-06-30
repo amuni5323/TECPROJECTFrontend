@@ -8,7 +8,7 @@ export default function HistoryPage() {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/posts');
+        const response = await fetch('https://tecprojectbackend.onrender.com/api/posts');
         const data = await response.json();
         setPosts(data);
       } catch (error) {
@@ -23,7 +23,7 @@ export default function HistoryPage() {
 
   const deletePost = async (id) => {
     try {
-      await fetch(`http://localhost:5001/api/posts/${id}`, {
+      await fetch(`https://tecprojectbackend.onrender.com/api/posts/${id}`, {
         method: 'DELETE',
       });
       setPosts(posts.filter((p) => p.id !== id));

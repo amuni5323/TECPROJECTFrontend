@@ -29,10 +29,10 @@ export default function Navbar() {
       </div>
 
       {/* Middle - Regenerate if logged in */}
-      <div>
+      <div >
         {isAuthenticated && (
           <button
-            className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700"
+            className=" bg-blue-600 px-4 py-2 rounded hover:bg-blue-700"
             onClick={() => router.push("/generate")}
           >
             Regenerate

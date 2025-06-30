@@ -474,7 +474,7 @@ export default function GeneratePage() {
   useEffect(() => {
     async function fetchSettings() {
       try {
-        const res = await fetch("http://localhost:5001/api/user-settings");
+        const res = await fetch("https://tecprojectbackend.onrender.com/api/user-settings");
         const data = await res.json();
         setPlatform(data.platform);
         setTone(data.tone);
@@ -501,13 +501,13 @@ export default function GeneratePage() {
 
     try {
       // ✅ Save preferences before generating content
-      await fetch("http://localhost:5001/api/user-settings", {
+      await fetch("https://tecprojectbackend.onrender.com/api/user-settings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ platform, tone, includeHashtags, useEmoji }),
       });
 
-      const response = await fetch("http://localhost:5001/api/generate", {
+      const response = await fetch("https://tecprojectbackend.onrender.com/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ topic, content, platform, tone, includeHashtags, useEmoji }),
@@ -531,7 +531,7 @@ export default function GeneratePage() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50 px-4">
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-xl">
-        <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">
+        <h1 className="text-2xl font-bold mb-6 text-center text-black-800">
           ✨ AI-Powered Content Generator
         </h1>
 
