@@ -55,7 +55,7 @@ export default function HistoryPage() {
                 </button>
 
                 {/* Meta Info */}
-                <div className="text-sm text-gray-500 mb-2">
+                <div className="text-sm text-black mb-2">
                   <span className="font-semibold">Date:</span>{' '}
                   {new Date(post.createdAt).toLocaleString()}
                   <br />
