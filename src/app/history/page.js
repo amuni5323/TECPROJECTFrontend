@@ -35,7 +35,7 @@ export default function HistoryPage() {
   return (
     <div className="min-h-screen px-4 py-10 bg-gray-100">
       <div className="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow">
-        <h1 className="text-2xl font-bold mb-6">🕘 Post History</h1>
+        <h1 className="text-2xl font-bold mb-6 text-black ">🕘 Post History</h1>
 
         {loading ? (
           <p>Loading...</p>
@@ -64,7 +64,7 @@ export default function HistoryPage() {
                 </div>
 
                 {/* Post Content */}
-                <div className="whitespace-pre-line">{post.content}</div>
+                <div className="whitespace-pre-line text-black">{post.content}</div>
               </li>
             ))}
           </ul>

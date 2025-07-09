@@ -530,8 +530,8 @@ export default function GeneratePage() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50 px-4">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-xl">
-        <h1 className="text-2xl font-bold mb-6 text-center text-black-800">
+      <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-xl text-black">
+        <h1 className="text-2xl font-bold mb-6 text-center text-black">
           ✨ AI-Powered Content Generator
         </h1>
 
