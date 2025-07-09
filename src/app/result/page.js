@@ -211,7 +211,7 @@ export default function ResultPage() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-2xl">
-        <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
+        <h1 className="text-2xl font-bold text-center mb-6 text-black">
           🎉 Generated Content
         </h1>
 
